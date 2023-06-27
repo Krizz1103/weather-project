@@ -1,0 +1,11 @@
+h1 {
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.card {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.currentCity {
+  font-size: larger;
+}
