@@ -44,9 +44,9 @@ function search(event) {
   let currentCity = document.querySelector("#currentCity");
 
   currentCity.innerHTML = `${searchInput.value}`;
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiKey = "54734t1680o470cbbe3f700fdd2fa18e";
   let city = document.querySelector("#search-text-input").value;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showTemperature);
 }
 
@@ -57,7 +57,7 @@ function showTemperature(response) {
   console.log(response);
   let cityHeading = document.querySelector("#search-text-input");
   cityHeading.innerHTML = response.data.city;
-  let temperature = Math.round(response.data.main.temp);
+  let temperature = Math.round(response.data.temperature.current);
   let currentTemperature = document.querySelector("#currentTemperature");
   currentTemperature.innerHTML = `currently ${temperature}ºC`;
   let wind = Math.round(response.data.wind.speed);
