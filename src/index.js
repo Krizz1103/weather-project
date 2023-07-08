@@ -54,7 +54,6 @@ let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
 
 function showTemperature(response) {
-  console.log(response);
   let cityHeading = document.querySelector("#search-text-input");
   cityHeading.innerHTML = response.data.city;
   let temperature = Math.round(response.data.temperature.current);
@@ -62,4 +61,9 @@ function showTemperature(response) {
   currentTemperature.innerHTML = `currently ${temperature}ºC`;
   let wind = Math.round(response.data.wind.speed);
   currentWind.innerHTML = `Windspeed ${wind} km/h`;
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
+  );
 }
