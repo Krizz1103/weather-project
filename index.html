@@ -21,39 +21,48 @@
   <body>
     <div class="container">
       <h1>Weather Forecast</h1>
-      <div class="card" style="width: 70rem">
+      <div class="card" style="width: 50rem">
         <div class="card-body">
+          <form id="search-form">
           <div class="row">
-            <div class="col-8">
-              <form id="search-form">
-                <input
+            <div class="col">
+              <input
                   type="text"
                   placeholder="Enter your city"
                   autocomplete="off"
                   autofocus="on"
                   id="search-text-input"
                 />
-                <input type="submit" value="Search" />
-              </form>
+                <input type="submit" value="Search" class="btn btn-primary"/>
             </div>
-            <div class="col-4" id="currentTime"></div>
           </div>
-          <br />
-          <div class="row">
-            <div city class="col-4" id="currentCity"></div>
+          </form>
+          <div class="overview">
+            <h2 id="currentCity"></h2>
+            <ul>
+              <li id="currentTime"></li>
+              <li id="description"></li>
+            </ul>
           </div>
           <div class="row">
-            <div class="col-4" id="currentTemperature">currently</div>
-            <span class="units"><a href="#" id="celsius-link">ºC</a> | <a href="#" id="fahrenheit-link"> ºF </a> </span>
-            <span id="description"></span>
-            <div class="col-4">
-              <img
+            <div class="col-6">
+              <div class="clearfix temperature">
+                <img
                 src=""
-                class="clearfix"
+                class="float-left"
                 id="icon"
-              ></img>
+                ></img>
+                <div class="float-left">
+                  <span id="currentTemperature"></span>
+                  <span class="units"><a href="#" id="celsius-link">ºC</a> | <a href="#" id="fahrenheit-link"> ºF </a> </span>
+                </div>
+              </div>
+          </div>
+            <div class="col-6">
+              <ul>
+                <li id="currentWind"></li>
+              </ul>
             </div>
-            <div class="col-4" id="currentWind"></div>
           </div>
           5 days Weather forecast
           <div class="row">
@@ -83,7 +92,6 @@
               <strong>23º</strong> / 18ºC
             </div>
           </div>
-        </div>
       </div>
     </div>
     <div class="signature">
