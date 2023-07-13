@@ -53,6 +53,31 @@ function search(event) {
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
 
+function showForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let days = ["Fri", "Sat", "Sun"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+      <div class="weather-forecast-date">${day}</div>
+      <i class="fa-solid fa-sun fa-4x" style="color: #f6e209"></i>
+      <div class="weather-forecast-temperature">
+        <span class="weather-forecast-temperature-max">20ºC / </span>
+        <span class="weather-forecast-temperature-min">18ºC</span>
+      </div>
+    </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
+showForecast();
+
 function showTemperature(response) {
   let cityHeading = document.querySelector("#search-text-input");
   let currentTemperature = document.querySelector("#currentTemperature");

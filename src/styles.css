@@ -24,7 +24,9 @@ li {
 #currentTemperature {
   font-size: 30px;
 }
-#icon {
+#search-form {
+  margin-top: 20;
+  margin-bottom: 20;
 }
 .units {
   position: relative;
