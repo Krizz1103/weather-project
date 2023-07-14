@@ -38,23 +38,6 @@ let month = months[now.getMonth()];
 
 currentTime.innerHTML = `${day} ${date} ${month} ${year} , ${hours}:${minutes}`;
 
-function search(event) {
-  event.preventDefault();
-  let city = document.querySelector("#search-text-input").value;
-  let apiKey = "54734t1680o470cbbe3f700fdd2fa18e";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-  let currentCity = document.querySelector("#currentCity");
-  let searchInput = document.querySelector("#search-text-input");
-
-  currentCity.innerHTML = `${searchInput.value}`;
-  axios.get(apiUrl).then(showTemperature);
-}
-
-let form = document.querySelector("#search-form");
-form.addEventListener("submit", search);
-
-search("New York");
-
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
@@ -106,12 +89,14 @@ function showTemperature(response) {
   let currentTemperature = document.querySelector("#currentTemperature");
   let description = document.querySelector("#description");
   let iconElement = document.querySelector("#icon");
+  let currentCity = document.querySelector("#currentCity");
+  let searchInput = document.querySelector("#search-text-input");
 
   let wind = Math.round(response.data.wind.speed);
 
   celsiusTemperature = response.data.temperature.current;
   let temperature = Math.round(`${celsiusTemperature}`);
-
+  currentCity.innerHTML = `${searchInput.value}`;
   cityHeading.innerHTML = response.data.city;
   currentTemperature.innerHTML = `${temperature}`;
   currentWind.innerHTML = `Windspeed ${wind} km/h`;
@@ -123,3 +108,21 @@ function showTemperature(response) {
 
   getForecast(response.data.coordinates);
 }
+
+function search(city) {
+  let apiKey = "54734t1680o470cbbe3f700fdd2fa18e";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(showTemperature);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let city = document.querySelector("#search-text-input");
+  search(city.value);
+}
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
+
+search("New York");
