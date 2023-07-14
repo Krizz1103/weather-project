@@ -53,22 +53,38 @@ function search(event) {
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
 
-function showForecast() {
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  return days[day];
+}
+
+function showForecast(response) {
+  let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
-  let days = ["Fri", "Sat", "Sun"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-      <div class="weather-forecast-date">${day}</div>
-      <i class="fa-solid fa-sun fa-4x" style="color: #f6e209"></i>
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+      <div class="weather-forecast-date">${formatDay(forecastDay.time)}</div>
+      <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+        forecastDay.condition.icon
+      }.png" />
       <div class="weather-forecast-temperature">
-        <span class="weather-forecast-temperature-max">20ºC / </span>
-        <span class="weather-forecast-temperature-min">18ºC</span>
+        <span class="weather-forecast-temperature-max">${Math.round(
+          forecastDay.temperature.maximum
+        )}ºC / </span>
+        <span class="weather-forecast-temperature-min">${Math.round(
+          forecastDay.temperature.minimum
+        )}ºC</span>
       </div>
     </div>`;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
@@ -76,7 +92,13 @@ function showForecast() {
   forecastElement.innerHTML = forecastHTML;
 }
 
-showForecast();
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "54734t1680o470cbbe3f700fdd2fa18e";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(showForecast);
+}
 
 function showTemperature(response) {
   let cityHeading = document.querySelector("#search-text-input");
@@ -97,4 +119,6 @@ function showTemperature(response) {
     "src",
     `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
+
+  getForecast(response.data.coordinates);
 }
