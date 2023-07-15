@@ -96,6 +96,7 @@ function showTemperature(response) {
 
   celsiusTemperature = response.data.temperature.current;
   let temperature = Math.round(`${celsiusTemperature}`);
+
   currentCity.innerHTML = `${searchInput.value}`;
   cityHeading.innerHTML = response.data.city;
   currentTemperature.innerHTML = `${temperature}`;
