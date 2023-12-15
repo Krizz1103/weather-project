@@ -43,6 +43,9 @@ body {
   );
 }
 
+.container {
+  margin: 50px;
+}
 .overview {
   margin-top: 20px;
   margin-bottom: 0px;
@@ -57,10 +60,7 @@ body {
   width: 180px;
 }
 .signature {
-  margin-left: 5%;
-  margin-bottom: 200px;
-  position: relative;
-  left: 10px;
+  margin-bottom: 150px;
 }
 
 #currentCity {
